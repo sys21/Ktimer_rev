@@ -14,7 +14,6 @@ public class MainActivity extends Activity {
 	private MyCountDownTimer myCountDownTimer;
 	private long settime;
 	private ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, 100);
-	private int counthour;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +39,7 @@ public class MainActivity extends Activity {
 				final int minute = np2.getValue();
 				final int second = np3.getValue();
 				textView.setText(String.format("%02d : %02d : %02d", hour, minute, second));
-				counthour = hour;
-				settime = (minute * 60 + second) * 1000;
+				settime = ((hour * 60 + minute) * 60 + second) * 1000;
 				btn_start.setEnabled(true);
 				btn_stop.setEnabled(false);
 			}
@@ -94,20 +92,14 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-			textView.setText(String.format("%02d : %02d : %02d", counthour, (millisUntilFinished / 1000 / 60), (millisUntilFinished / 1000 % 60)));
+			textView.setText(String.format("%02d : %02d : %02d", (millisUntilFinished / 1000 / 3600), ((millisUntilFinished / 1000 % 3600) / 60),
+					((millisUntilFinished / 1000 % 3600) % 60)));
 		}
 
 		@Override
 		public void onFinish() {
-			if (counthour == 0) {
-				textView.setText(getResources().getString(R.string.time_up));
-				toneGenerator.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-			} else {
-				counthour = counthour - 1;
-				settime = 3599000l;
-				myCountDownTimer = new MyCountDownTimer(settime, 500l);
-				myCountDownTimer.start();
-			}
+			textView.setText(getResources().getString(R.string.time_up));
+			toneGenerator.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
 		}
 	}
 }
