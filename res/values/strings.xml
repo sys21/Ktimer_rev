@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ktimer</string>
+    <string name="btn_start_label">開始</string>
+    <string name="btn_stop_label">停止</string>
+    <string name="dialog_setting_label">未設定</string>
+    <string name="btn_set_label">時間設定</string>
+    <string name="time_up">終了</string>
+
+</resources>
