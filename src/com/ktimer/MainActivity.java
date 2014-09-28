@@ -14,20 +14,22 @@ public class MainActivity extends Activity {
 	private MyCountDownTimer myCountDownTimer;
 	private long settime;
 	private ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, 100);
+	private Button btn_set;
+	private Button btn_start;
+	private Button btn_stop;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final TextView textView = (TextView) findViewById(R.id.label_dialog_text);
-		final Button btn_set = (Button) findViewById(R.id.btn_set);
-		final Button btn_start = (Button) findViewById(R.id.btn_start);
-		final Button btn_stop = (Button) findViewById(R.id.btn_stop);
 		final NumberPicker np1 = (NumberPicker) findViewById(R.id.np1);
 		final NumberPicker np2 = (NumberPicker) findViewById(R.id.np2);
 		final NumberPicker np3 = (NumberPicker) findViewById(R.id.np3);
-		btn_start.setEnabled(false);
-		btn_stop.setEnabled(false);
+		btn_set = (Button) findViewById(R.id.btn_set);
+		btn_start = (Button) findViewById(R.id.btn_start);
+		btn_stop = (Button) findViewById(R.id.btn_stop);
+		Status.NOT_SET.changeStatus(btn_set, btn_start, btn_stop);
 		initViews(np1, 99);
 		initViews(np2, 59);
 		initViews(np3, 59);
@@ -40,8 +42,7 @@ public class MainActivity extends Activity {
 				final int second = np3.getValue();
 				textView.setText(String.format("%02d : %02d : %02d", hour, minute, second));
 				settime = ((hour * 60 + minute) * 60 + second) * 1000;
-				btn_start.setEnabled(true);
-				btn_stop.setEnabled(false);
+				Status.SET.changeStatus(btn_set, btn_start, btn_stop);
 			}
 		});
 		// 開始ボタン
@@ -51,9 +52,7 @@ public class MainActivity extends Activity {
 				// カウントダウンView
 				myCountDownTimer = new MyCountDownTimer(settime, 500l);
 				myCountDownTimer.start();
-				btn_set.setEnabled(false);
-				btn_start.setEnabled(false);
-				btn_stop.setEnabled(true);
+				Status.START.changeStatus(btn_set, btn_start, btn_stop);
 				np1.setEnabled(false);
 				np2.setEnabled(false);
 				np3.setEnabled(false);
@@ -65,7 +64,7 @@ public class MainActivity extends Activity {
 			public void onClick(final View v) {
 				myCountDownTimer.cancel();
 				settime = 0;
-				btn_set.setEnabled(true);
+				Status.STOP.changeStatus(btn_set, btn_start, btn_stop);
 				np1.setEnabled(true);
 				np2.setEnabled(true);
 				np3.setEnabled(true);
@@ -100,6 +99,7 @@ public class MainActivity extends Activity {
 		public void onFinish() {
 			textView.setText(getResources().getString(R.string.time_up));
 			toneGenerator.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+			Status.END.changeStatus(btn_set, btn_start, btn_stop);
 		}
 	}
 }
