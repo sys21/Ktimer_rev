@@ -8,22 +8,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp" >
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp" >
 
         <NumberPicker
             android:id="@+id/np1"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content" />
 
         <NumberPicker
             android:id="@+id/np2"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content" />
 
         <NumberPicker
             android:id="@+id/np3"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -60,9 +60,7 @@
             android:textSize="50sp" />
     </LinearLayout>
 
-    <View style="@style/border_black" />
-
-    <TextView
+    <View style="@style/border_black" /><TextView
         android:id="@+id/label_dialog_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
