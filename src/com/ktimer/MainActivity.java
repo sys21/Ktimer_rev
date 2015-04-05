@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 		btn_start = (Button) findViewById(R.id.btn_start);
 		btn_stop = (Button) findViewById(R.id.btn_stop);
 		Status.NOT_SET.changeStatus(btn_set, btn_start, btn_stop);
-		initViews(np1, 99);
+		initViews(np1, 24);
 		initViews(np2, 59);
 		initViews(np3, 59);
 		// éûä‘ê›íË
