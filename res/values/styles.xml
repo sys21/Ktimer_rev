@@ -17,6 +17,13 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+   	<style name="MyTheme" parent="@android:style/Theme.Black">
+	    <item name="android:actionBarStyle">@style/MyActionBar</item>
+	    <item name="android:windowBackground">@drawable/bg</item>
+	</style>
+    
+   	<!-- style -->
+    
     <style name="border_black">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
